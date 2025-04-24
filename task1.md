@@ -2,17 +2,17 @@
 
 **TitaniumCore** delivers high-speed file analysis in milliseconds. Its powerful engine scales effortlessly — from a few samples to billions per day — making it ideal for businesses of any size.
 
-## ⚙️ Use TitaniumCore to:
+## Use TitaniumCore to:
 - Detect advanced threats quickly and accurately  
 - Analyze massive volumes of files with minimal latency  
 - Adapt to changing security needs with customizable rule sets  
 
-## ⚙️ The Built-in Rules Engine:
+## The Built-in Rules Engine:
 - Applies ReversingLabs threat rules  
 - Supports customer-supplied YARA rules  
 - Calculates threat levels instantly and efficiently  
 
-## ⚙️ After Analysis, TitaniumCore:
+## After Analysis, TitaniumCore:
 - Routes extracted files automatically to tools like decompilers, debuggers, sandboxes, or VMs  
 - Sends high-risk files to security analysts for deeper investigation  
 
