@@ -1,33 +1,31 @@
-### Sample Download API
+### Sample API
 
-The **Sample Download API** lets authenticated users retrieve original email attachments analyzed by the Z1000 system. You can list available samples or request download links for specific files.
+The **Sample API** lets authenticated users download original samples analyzed by the Z1000 system. It enables you to list available samples or request download links for specific files.
 
 #### Base URL
 https://example.com/api/v1/download_samples/
 
 #### Authentication
 
-This API uses **Basic Authentication**.
+This API uses Basic Authentication.
 
 **Credentials**:
 - Username: `z1000_user`
 - Password: `z1000_password_example_123`
-
-Include these in your request headers.
 
 ---
 #### HTTP Methods
 
 ##### GET
 
-Retrieve a list of available files for download. Returns a JSON array of files based on optional filters.
+Retrieves a list of available files for download as a JSON response.
 
 ###### Query Parameters
 
 | Parameter | Type   | Description |
 |-----------|--------|-------------|
-| `date`    | string | Return items analyzed on a specific date (format: `YYYY-MM-DD`). |
-| `user_id` | int    | Return items uploaded by a specific user. |
+| `date`    | string | Returns items analyzed on a specific date (format: `DD-MM-YYYY`). |
+| `user_id` | int    | Returns items uploaded by a specific user. |
 
 > Both parameters are ignored when using the `POST` method.
 
