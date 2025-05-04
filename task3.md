@@ -16,72 +16,95 @@ This API uses **Basic Authentication**.
 Include these in your request headers.
 
 ---
-
 ## HTTP Methods
 
-### `GET`
+### GET
 
-**Description**: Returns a JSON list of available samples for download.
+Retrieve a list of available files for download. Returns a JSON array of files based on optional filters.
 
-**Query Parameters**:
-- `date`: (optional) Filter results by analysis date. Format: `YYYY-MM-DD`.
-- `user_id`: (optional) Filter results by uploader ID.
+#### Query Parameters
 
-**Example request (cURL)**:
+| Parameter | Type   | Description |
+|-----------|--------|-------------|
+| `date`    | string | Return items analyzed on a specific date (format: `YYYY-MM-DD`). |
+| `user_id` | int    | Return items uploaded by a specific user. |
+
+> Both parameters are ignored when using the `POST` method.
+
+#### Example Request (cURL)
+
 ```bash
 curl -u z1000_user:z1000_password_example_123 \
-  "https://example.com/api/v1/download_samples/?date=2025-04-01&user_id=42"
-Example response:
+  "https://api.example.com/api/v1/download_samples/?date=2025-05-01&user_id=42"
+```
+
+#### Example Response
+
+```bash
 [
   {
-    "sample_id": "abc123",
-    "filename": "invoice_2025.pdf",
-    "date_analyzed": "2025-04-01",
+    "sample_id": "12345",
+    "filename": "invoice.pdf",
+    "date": "2025-05-01",
     "user_id": 42
   },
   {
-    "sample_id": "def456",
-    "filename": "malware_sample.exe",
-    "date_analyzed": "2025-04-01",
+    "sample_id": "12346",
+    "filename": "payload.exe",
+    "date": "2025-05-01",
     "user_id": 42
   }
 ]
 ```
-### `POST`
 
-Retrieves download links for specific samples.
+### POST
 
-### Endpoint
+Request download links for specific files by providing their IDs.
 
-`POST /api/v1/download_samples/`
-
-### Request Body
-
-Provide a JSON array of sample IDs you want to download.
-
-```json
+#### Request Body (JSON)
+```bash
 {
-  "sample_ids": ["abc123", "def456", "ghi789"]
+  "sample_ids": ["12345", "12346"]
 }
 ```
-### Response
-Returns a JSON object with download links for each file.
+
+#### Example Request (Python Requests)
+
+```bash
+import requests
+from requests.auth import HTTPBasicAuth
+
+url = "https://api.example.com/api/v1/download_samples/"
+payload = {
+    "sample_ids": ["12345", "12346"]
+}
+
+response = requests.post(url, json=payload, auth=HTTPBasicAuth("z1000_user", "z1000_password_example_123"))
+print(response.json())
 ```
+
+#### Example Request (cURL)
+
+```bash
+curl -X POST https://api.example.com/api/v1/download_samples/ \
+  -u z1000_user:z1000_password_example_123 \
+  -H "Content-Type: application/json" \
+  -d '{"sample_ids": ["12345", "12346"]}'
+```
+
+#### Example Response
+
+```bash
 {
   "downloads": [
     {
-      "sample_id": "abc123",
-      "download_url": "https://example.com/download/abc123"
+      "sample_id": "12345",
+      "download_url": "https://api.example.com/files/12345/download"
     },
     {
-      "sample_id": "def456",
-      "download_url": "https://example.com/download/def456"
-    },
-    {
-      "sample_id": "ghi789",
-      "download_url": "https://example.com/download/ghi789"
+      "sample_id": "12346",
+      "download_url": "https://api.example.com/files/12346/download"
     }
   ]
 }
 ```
-**Note:** Query parameters like date and user_id are ignored when using the POST method.
