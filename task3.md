@@ -47,3 +47,41 @@ Example response:
   }
 ]
 ```
+### `POST`
+
+Retrieves download links for specific samples.
+
+### Endpoint
+
+`POST /api/v1/download_samples/`
+
+### Request Body
+
+Provide a JSON array of sample IDs you want to download.
+
+```json
+{
+  "sample_ids": ["abc123", "def456", "ghi789"]
+}
+```
+### Response
+Returns a JSON object with download links for each file.
+```
+{
+  "downloads": [
+    {
+      "sample_id": "abc123",
+      "download_url": "https://example.com/download/abc123"
+    },
+    {
+      "sample_id": "def456",
+      "download_url": "https://example.com/download/def456"
+    },
+    {
+      "sample_id": "ghi789",
+      "download_url": "https://example.com/download/ghi789"
+    }
+  ]
+}
+```
+**Note:** Query parameters like date and user_id are ignored when using the POST method.
